@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World');
-})
+const PORT = 3000;
+
+function handleListening() {
+    console.log(`Listening on: http://localhost:${PORT}`);
+}
+
+app.listen(PORT, handleListening);
