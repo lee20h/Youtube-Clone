@@ -3,20 +3,13 @@ import logger from "morgan";
 import helmet from "helmet";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import morgan from "morgan";
+import { userRouter } from "./routes";
 
 const app = express();
-
-const PORT = 3000;
-
-const handleListening = () => {
-    console.log(`Listening on: http://localhost:${PORT}`);
-};
 
 const handleHome = (req, res) => {
     res.send("Hello from wow");
 };
-
 
 const handleProfile = (req, res) => {
     res.send("Your are on my Profile");
@@ -30,4 +23,6 @@ app.use(logger("dev"));
 
 app.get("/", handleHome);
 app.get("/profile", handleProfile);
-app.listen(PORT, handleListening);
+app.use("/user", userRouter);
+
+export default app;
