@@ -1,4 +1,6 @@
 extends layout/main
 
 block content
-    p Hello!!
+    each item in videos
+        h1= item.title
+        p= item.description
