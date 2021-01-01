@@ -1,4 +1,7 @@
 import routes from './routes'
+import multer from 'multer';
+
+const VideoMulter = multer({ dest: "uploads/videos/" });
 
 export const localsMiddleware = (req, res, next) => {
     res.locals.siteName = "Wetube";
@@ -14,3 +17,5 @@ export const videoSetPolicy = (req, res, next) => {
     res.setHeader("Content-Security-Policy", "script-src 'self' https://archive.org");
     return next();
 }
+
+export const uploadVideo = VideoMulter.single('videoFile');
