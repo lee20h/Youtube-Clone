@@ -16,6 +16,8 @@ export const search = (req, res) => {
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 }
 
+// upload
+
 export const getUpload = (req, res) => res.render("upload", { pageTitle: "Upload" });
 export const postUpload = async (req, res) => {
   const {
@@ -30,6 +32,8 @@ export const postUpload = async (req, res) => {
   res.redirect(routes.videoDetail(newVideo.id));
 };
 
+/// videoDetail
+
 export const videoDetail = async (req, res) => {
   const {
     params: { id }
@@ -41,5 +45,35 @@ export const videoDetail = async (req, res) => {
     res.redirect(routes.home)
   }
 };
-export const editVideo = (req, res) => res.render("editVideo", { pageTitle: "Edit-Video" });
+
+// editVideo
+
+export const getEditVideo = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
+export const postEditVideo = async (req, res) => {
+  const {
+    params: { id },
+    body: { title, description }
+  } = req;
+  try {
+    await Video.findOneAndUpdate({ _id: id }, { title, description });
+    res.redirect(routes.videoDetail(id));
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
+
+// deleteVideo
+
 export const deleteVideo = (req, res) => res.render("deleteVideo", { pageTitle: "Delete-Video" });
