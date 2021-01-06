@@ -1,5 +1,5 @@
 {
-  "name": "wetube",
+  "name": "youtube_clone",
   "version": "1.0.0",
   "description": "Cloning Youtube with Vanilla and NodeJS",
   "main": "index.js",
