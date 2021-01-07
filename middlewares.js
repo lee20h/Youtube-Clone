@@ -6,10 +6,7 @@ const VideoMulter = multer({ dest: "uploads/videos/" });
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "Youtube Clone";
   res.locals.routes = routes;
-  res.locals.user = {
-    isAuthenticated: true,
-    id: 1,
-  };
+  res.locals.user = req.user || null;
   next();
 };
 
@@ -19,6 +16,22 @@ export const videoSetPolicy = (req, res, next) => {
     "script-src 'self' https://archive.org"
   );
   return next();
+};
+
+export const onlyPublic = (req, res, next) => {
+  if (req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
+};
+
+export const onlyPrivate = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect(routes.home);
+  }
 };
 
 export const uploadVideo = VideoMulter.single("videoFile");
