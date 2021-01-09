@@ -1,6 +1,7 @@
 import passport from "passport";
 import GithubStrategy from "passport-github";
-import { GithubLogincb } from "./controllers/userController";
+import FacebookStrategy from "passport-facebook";
+import { FacebookLoginCb, GithubLogincb } from "./controllers/userController";
 import User from "./models/User";
 import routes from "./routes";
 
@@ -14,6 +15,19 @@ passport.use(
       callbackURL: `http://localhost:4000${routes.githubCb}`,
     },
     GithubLogincb
+  )
+);
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
+      callbackURL: `http://localhost:4000/${routes.facebookCb}`,
+      profileFields: ["id", "displayName", "photos", "email"],
+      scope: ["public_profile", "email"],
+    },
+    FacebookLoginCb
   )
 );
 

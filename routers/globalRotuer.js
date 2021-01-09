@@ -1,11 +1,13 @@
 import express from "express";
 import passport from "passport";
 import {
+  FacebookLogin,
   getJoin,
   getLogin,
   getMe,
   githubLogin,
   logout,
+  postFacebookLogin,
   postGithubLogin,
   postJoin,
   postLogin,
@@ -27,6 +29,13 @@ globalRouter.get(
   routes.githubCb,
   passport.authenticate("github", { failureRedirect: routes.login }),
   postGithubLogin
+);
+
+globalRouter.get(routes.facebook, FacebookLogin);
+globalRouter.get(
+  routes.githubCb,
+  passport.authenticate("facebook", { failureRedirect: routes.login }),
+  postFacebookLogin
 );
 
 globalRouter.get(routes.me, getMe);
