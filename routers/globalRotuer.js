@@ -3,6 +3,7 @@ import passport from "passport";
 import {
   getJoin,
   getLogin,
+  getMe,
   githubLogin,
   logout,
   postGithubLogin,
@@ -28,6 +29,7 @@ globalRouter.get(
   postGithubLogin
 );
 
+globalRouter.get(routes.me, getMe);
 globalRouter.get(routes.home, home);
 globalRouter.get(routes.logout, onlyPrivate, logout);
 globalRouter.get(routes.search, search);
