@@ -2,6 +2,7 @@ import multer from "multer";
 import routes from "./routes";
 
 const VideoMulter = multer({ dest: "uploads/videos/" });
+const AvatarMulter = multer({ dest: "uploads/avatars/" });
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "Youtube Clone";
@@ -35,3 +36,4 @@ export const onlyPrivate = (req, res, next) => {
 };
 
 export const uploadVideo = VideoMulter.single("videoFile");
+export const uploadAvatar = AvatarMulter.single("avatar");

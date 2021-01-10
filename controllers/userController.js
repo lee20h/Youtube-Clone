@@ -129,5 +129,21 @@ export const userDetail = async (req, res) => {
 
 export const getEditProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit-Profile" });
+
+export const postEditProfile = async (req, res) => {
+  const {
+    body: { name, email },
+    file,
+  } = req;
+  try {
+    await User.findByIdAndUpdate(req.user.id, {
+      name,
+      email,
+      avatarUrl: file ? file.path : req.user.avatarUrl,
+    });
+  } catch (error) {
+    res.render("editProfile", { pagetitle: "Edit Profile" });
+  }
+};
 export const changePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change-Password" });
