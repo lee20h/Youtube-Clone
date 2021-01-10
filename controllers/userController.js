@@ -150,15 +150,15 @@ export const getChangePassword = (req, res) =>
 
 export const postChangePassword = async (req, res) => {
   const {
-    body: { oldpassword, newpassword, newpassword1 },
+    body: { oldPassword, newPassword, newPassword1 },
   } = req;
   try {
-    if (newpassword !== newpassword1) {
+    if (newPassword !== newPassword1) {
       res.status(400);
       res.redirect(`/users/${routes.changePassword}`);
       return;
     }
-    await req.user.changePassword(oldpassword, newpassword);
+    await req.user.changePassword(oldPassword, newPassword);
     res.redirect(routes.me);
   } catch (error) {
     res.status(400);
