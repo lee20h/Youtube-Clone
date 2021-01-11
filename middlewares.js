@@ -14,7 +14,7 @@ export const localsMiddleware = (req, res, next) => {
 export const videoSetPolicy = (req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
-    "script-src 'self' https://archive.org"
+    "script-src 'self' 'unsafe-eval'; object-src 'self'"
   );
   return next();
 };
