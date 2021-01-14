@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
+import axios from "axios";
+
 const videoContainer = document.getElementById("jsVideoPlayer");
 const videoPlayer = document.querySelector("#jsVideoPlayer video");
 const playBtn = document.getElementById("jsPlayButton");
@@ -9,9 +11,10 @@ const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
 
-const registerView = () => {
+const registerView = async () => {
   const videoId = window.location.href.split("/videos/")[1];
-  fetch(`/api/${videoId}/view`, {
+  await axios({
+    url: `/api/${videoId}/view`,
     method: "POST",
   });
 };
@@ -96,7 +99,6 @@ function setTotalTime() {
 }
 
 function handleEnded() {
-  registerView();
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = '<i class="fas fa-play"></i>';
 }
@@ -117,6 +119,7 @@ function handleDrag(event) {
 
 function init() {
   volumeRange.value = 0.5;
+  registerView();
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   fullScreenBtn.addEventListener("click", goFullScreen);
