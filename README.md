@@ -2,15 +2,21 @@
 
 Cloning Youtube with Vanilla and NodeJS
 
+## Function
+
+- Login(Local, Github, Facebook)
+- Profile
+- Video (Search, Upload, Comment, View)
+
 ## Page
 
-- [ ] Home
+- [x] Home
 - [x] Join
 - [x] Login
 - [x] Search
-- [ ] User Detail
+- [x] User Detail
 - [x] Edit Profile
 - [x] Change Password
 - [x] Upload
-- [ ] Video Detail
+- [x] Video Detail
 - [x] Edit Video
